@@ -1,0 +1,363 @@
+Jabulani Kunene Student No: 08HA2212548  
+
+ 
+
+Systems Development 1 (HSYD100-1) 
+
+Summative Assessment 1 
+
+ 
+
+Question 1 
+
+import java.util.ArrayList; 
+
+import java.util.Arrays; 
+
+import java.util.List; 
+
+import java.util.Random; 
+
+import java.util.Scanner; 
+
+  
+
+public class GuessingGame { 
+
+    public static void main(String[] args) { 
+
+        Scanner scanner = new Scanner(System.in); 
+
+        boolean playAgain = true; 
+
+  
+
+        while (playAgain) { 
+
+            // Initialize the ArrayList with string values 
+
+            List<String> words = new ArrayList<>(Arrays.asList( 
+
+                    "Apple", "Banana", "Orange", "Strawberry", "Watermelon", 
+
+                    "Mango", "Pineapple", "Grapes", "Kiwi", "Blueberry" 
+
+            )); 
+
+  
+
+            System.out.println("Guessing Game - Guess the word!"); 
+
+            System.out.println("--------------------------------"); 
+
+  
+
+            Random random = new Random(); 
+
+            int randomIndex = random.nextInt(words.size()); 
+
+            String selectedWord = words.get(randomIndex); 
+
+  
+
+            int remainingGuesses = 3; 
+
+            boolean correctGuess = false; 
+
+  
+
+            while (remainingGuesses > 0) { 
+
+                System.out.println("Remaining Guesses: " + remainingGuesses); 
+
+                System.out.print("Enter your guess: "); 
+
+                String guess = scanner.nextLine(); 
+
+  
+
+                if (guess.equalsIgnoreCase(selectedWord)) { 
+
+                    correctGuess = true; 
+
+                    break; 
+
+                } else { 
+
+                    remainingGuesses--; 
+
+                    if (remainingGuesses == 2) { 
+
+                        System.out.println("First letter of the word: " + selectedWord.charAt(0)); 
+
+                    } else if (remainingGuesses == 1) { 
+
+                        System.out.println("Number of letters in the word: " + selectedWord.length()); 
+
+                    } 
+
+                    System.out.println("Incorrect guess. Try again!"); 
+
+                } 
+
+            } 
+
+  
+
+            if (correctGuess) { 
+
+                words.remove(selectedWord); 
+
+                System.out.println("Congratulations! You guessed the word correctly."); 
+
+            } else { 
+
+                System.out.println("Sorry, you ran out of guesses. The word was: " + selectedWord); 
+
+            } 
+
+  
+
+            System.out.println("Remaining words in the list: " + words.size()); 
+
+  
+
+            // Ask the user if they want to play again 
+
+            System.out.print("Do you want to play again? (yes/no): "); 
+
+            String playAgainInput = scanner.nextLine(); 
+
+            playAgain = playAgainInput.equalsIgnoreCase("yes"); 
+
+            System.out.println(); 
+
+        } 
+
+  
+
+        System.out.println("Thank you for playing the Guessing Game!"); 
+
+        scanner.close(); 
+
+    } 
+
+} 
+
+b) public class Election { 
+
+    private String candidateName; 
+
+    private int votes; 
+
+  
+
+    public Election(String candidateName) { 
+
+        this.candidateName = candidateName; 
+
+        this.votes = 0; 
+
+    } 
+
+  
+
+    public String getCandidateName() { 
+
+        return candidateName; 
+
+    } 
+
+  
+
+    public int getVotes() { 
+
+        return votes; 
+
+    } 
+
+  
+
+    public void vote() { 
+
+        votes++; 
+
+    } 
+
+} 
+
+ 
+
+public class TestElection { 
+
+    public static void main(String[] args) { 
+
+        int arrayLength = Integer.parseInt(JOptionPane.showInputDialog("Enter the length of the array:")); 
+
+  
+
+        Election[] electionArray = new Election[arrayLength]; 
+
+  
+
+        for (int i = 0; i < arrayLength; i++) { 
+
+            String candidateName = JOptionPane.showInputDialog("Enter the candidate name for object " + (i + 1) + ":"); 
+
+            Election election = new Election(candidateName); 
+
+            electionArray[i] = election; 
+
+        } 
+
+ c)  
+
+        // Calculate total votes 
+
+        int totalVotes = 0; 
+
+        for (Election election : electionArray) { 
+
+            String input = JOptionPane.showInputDialog("Enter the number of votes for " + election.getCandidateName() + ":"); 
+
+            int votes = Integer.parseInt(input); 
+
+            election.vote(); 
+
+            totalVotes += votes; 
+
+        } 
+
+  
+
+        // Calculate and display results 
+
+        System.out.println("Election Results"); 
+
+        System.out.println("----------------"); 
+
+  
+
+        for (Election election : electionArray) { 
+
+            double percentage = (double) election.getVotes() / totalVotes * 100; 
+
+            System.out.printf("%s: %.2f%%\n", election.getCandidateName(), percentage); 
+
+        } 
+
+  
+
+        // Determine the winner 
+
+        Election winner = electionArray[0]; 
+
+        for (int i = 1; i < arrayLength; i++) { 
+
+            if (electionArray[i].getVotes() > winner.getVotes()) { 
+
+                winner = electionArray[i]; 
+
+            } 
+
+        } 
+
+  
+
+        System.out.println("----------------"); 
+
+        System.out.println("Winner: " + winner.getCandidateName()); 
+
+    } 
+
+} 
+
+ 
+
+d) import java.util.ArrayList; 
+
+import java.util.List; 
+
+  
+
+public class Main { 
+
+    public static void main(String[] args) { 
+
+        // Assuming you have an array named 'array' containing candidate objects 
+
+  
+
+        // Declare the ArrayList to store the objects that meet the condition 
+
+        List<Candidate> selectedCandidates = new ArrayList<>(); 
+
+  
+
+        // Iterate over the array and add objects with >= 4000 votes to the ArrayList 
+
+        for (Candidate candidate : array) { 
+
+            if (candidate.getVotes() >= 4000) { 
+
+                selectedCandidates.add(candidate); 
+
+            } 
+
+        } 
+
+  
+
+        // Print the selected candidates or perform any other desired operations 
+
+        for (Candidate candidate : selectedCandidates) { 
+
+            System.out.println(candidate.getName()); 
+
+        } 
+
+    } 
+
+} 
+
+ 
+
+e) import java.util.ArrayList; 
+
+import java.util.List; 
+
+import javax.swing.JOptionPane; 
+
+  
+
+public class Main { 
+
+    public static void main(String[] args) { 
+
+        // Assuming you have an ArrayList named 'candidateList' containing candidate objects 
+
+  
+
+        // Declare a StringBuilder to store the candidate names 
+
+        StringBuilder namesBuilder = new StringBuilder(); 
+
+  
+
+        // Iterate over the ArrayList and append the names to the StringBuilder 
+
+        for (Candidate candidate : candidateList) { 
+
+            namesBuilder.append(candidate.getName()).append("\n"); 
+
+        } 
+
+  
+
+        // Show the names in a JOptionPane dialog box 
+
+        JOptionPane.showMessageDialog(null, namesBuilder.toString()); 
+
+    } 
+
+} 
